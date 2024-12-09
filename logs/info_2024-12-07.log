@@ -1,0 +1,6 @@
+2024-12-07 04:16:56.427 | INFO     | core.middleware:write_request_log:24 - basehttp.log_message: 'GET http://127.0.0.1:8081/ http/1.1' 404utf-8 b'22' 0.0009968280792236328
+2024-12-07 04:16:56.678 | INFO     | core.middleware:write_request_log:24 - basehttp.log_message: 'GET http://127.0.0.1:8081/favicon.ico http/1.1' 404utf-8 b'22' 0.0009987354278564453
+2024-12-07 04:16:59.715 | INFO     | core.middleware:write_request_log:24 - basehttp.log_message: 'GET http://127.0.0.1:8081/docs http/1.1' 200utf-8 b'930' 0.0010020732879638672
+2024-12-07 05:41:00.766 | INFO     | core.middleware:write_request_log:24 - basehttp.log_message: 'GET http://127.0.0.1:8081/ http/1.1' 404utf-8 b'22' 0.0009989738464355469
+2024-12-07 05:41:07.577 | INFO     | core.middleware:write_request_log:24 - basehttp.log_message: 'GET http://127.0.0.1:8081/docs http/1.1' 200utf-8 b'930' 0.0009992122650146484
+2024-12-07 05:41:08.880 | INFO     | core.middleware:write_request_log:24 - basehttp.log_message: 'GET http://127.0.0.1:8081/openapi.json http/1.1' 200utf-8 b'1811' 0.12792301177978516
