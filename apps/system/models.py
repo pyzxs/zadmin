@@ -73,7 +73,8 @@ class Menu(BaseModel):
     menu_type: Mapped[str] = mapped_column(String(8), comment="菜单类型")
     parent_id: Mapped[Union[int, None]] = mapped_column(
         Integer,
-        ForeignKey("menus.id", ondelete='CASCADE'),
+        ForeignKey("menus.id"),
+        nullable=True,
         comment="父菜单"
     )
     perms: Mapped[Union[str or None]] = mapped_column(String(50), comment="权限标识", unique=False, index=True)
