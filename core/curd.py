@@ -4,6 +4,7 @@
 # @Create Time    : 2025/1/26
 # @File           : curl.py
 # @desc           : 主配置文件
+import types
 from datetime import datetime
 
 from core import database
@@ -25,7 +26,7 @@ def get_list(query, model, pagination):
 
 def create(model, data):
     """创建数据"""
-    db = database.get_db()
+    db = _get_db()
     m = model(**data)
     db.add(m)
     db.commit()
@@ -33,14 +34,14 @@ def create(model, data):
 
 def update(model, primary_id, data):
     """更新数据"""
-    db = database.get_db()
+    db = _get_db()
     db.query(model).filter_by(id=primary_id).update(data)
     db.commit()
 
 
 def soft_delete(model, primary_id):
     """软删除"""
-    db = database.get_db()
+    db = _get_db()
     db.query(model).filter_by(id=primary_id).update({"deleted_at": datetime.now()})
     db.commit()
 
@@ -54,13 +55,12 @@ def real_delete(model, primary_id):
 
 def get(model, primary_id):
     """获取详情"""
-    db = database.get_db()
-    return db.query(model).filter_by(id=primary_id).first()
+    return _get_db().query(model).filter_by(id=primary_id).first()
 
 
 def restore(row):
     """回复软软删除"""
-    db = database.get_db()
+    db = _get_db()
     row.deleted_at = None
     db.commit()
 
@@ -73,3 +73,10 @@ def order_by(query, model, page):
         else:
             query = query.order_by(field.asc())
     return query
+
+def _get_db():
+    db = database.get_db()
+    if isinstance(db, types.GeneratorType):
+        db = next(db)
+
+    return db

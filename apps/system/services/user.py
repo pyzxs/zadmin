@@ -4,7 +4,7 @@
 # @Create Time    : 2024/12/9
 # @File           : user
 # @desc           : 主配置文件
-from apps.user.models import User
+from apps.system.models import User
 from core import curd
 from utils import encrypt, response
 

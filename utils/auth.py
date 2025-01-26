@@ -13,7 +13,7 @@ from jose import jwt, JWTError
 from sqlalchemy.orm import Session
 from starlette.requests import Request
 
-from apps.user.models import User
+from apps.system.models import User
 from config import settings
 from config.settings import oauth2_scheme
 from core.database import get_db
