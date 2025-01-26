@@ -6563,3 +6563,12 @@ fastapi.exceptions.ResponseValidationError: 1 validation errors:
 2024-12-09 22:51:09.947 | INFO     | core.middleware:write_request_log:24 - basehttp.log_message: 'GET http://127.0.0.1:8081/user/lists?page=1&limit=10&v_order_field=id&v_order=desc http/1.1' 404utf-8 b'22' 0.0010056495666503906
 2024-12-09 22:51:26.606 | INFO     | core.middleware:write_request_log:24 - basehttp.log_message: 'GET http://127.0.0.1:8081/docs http/1.1' 200utf-8 b'930' 0.0006268024444580078
 2024-12-09 22:51:26.913 | INFO     | core.middleware:write_request_log:24 - basehttp.log_message: 'GET http://127.0.0.1:8081/openapi.json http/1.1' 200utf-8 b'5751' 0.026992321014404297
+2024-12-09 23:11:17.199 | INFO     | core.middleware:write_request_log:24 - basehttp.log_message: 'GET http://127.0.0.1:8081/docs http/1.1' 200utf-8 b'930' 0.07248163223266602
+2024-12-09 23:11:40.603 | INFO     | core.middleware:write_request_log:24 - basehttp.log_message: 'GET http://127.0.0.1:8081/docs http/1.1' 200utf-8 b'930' 0.05197262763977051
+2024-12-09 23:12:01.009 | INFO     | core.middleware:write_request_log:24 - basehttp.log_message: 'GET http://127.0.0.1:8081/docs http/1.1' 200utf-8 b'930' 0.000997781753540039
+2024-12-09 23:12:04.468 | INFO     | core.middleware:write_request_log:24 - basehttp.log_message: 'GET http://127.0.0.1:8081/docs http/1.1' 200utf-8 b'930' 0.0009980201721191406
+2024-12-09 23:12:25.964 | INFO     | core.middleware:write_request_log:24 - basehttp.log_message: 'GET http://127.0.0.1:8081/docs http/1.1' 200utf-8 b'930' 0.0009374618530273438
+2024-12-09 23:12:38.634 | INFO     | core.middleware:write_request_log:24 - basehttp.log_message: 'GET http://127.0.0.1:8081/openapi.json http/1.1' 200utf-8 b'5751' 0.06334996223449707
+2024-12-09 23:12:52.607 | INFO     | core.middleware:write_request_log:24 - basehttp.log_message: 'POST http://127.0.0.1:8081/user/api/login http/1.1' 200utf-8 b'186' 0.8072218894958496
+2024-12-09 23:12:58.459 | INFO     | core.middleware:write_request_log:24 - basehttp.log_message: 'GET http://127.0.0.1:8081/user/?page=1&limit=10 http/1.1' 200utf-8 b'140' 0.02329540252685547
+2024-12-09 23:13:21.887 | INFO     | core.middleware:write_request_log:24 - basehttp.log_message: 'GET http://127.0.0.1:8081/user/?page=1&limit=10 http/1.1' 200utf-8 b'140' 0.011990547180175781

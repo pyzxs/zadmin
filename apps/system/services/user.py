@@ -5,8 +5,8 @@
 # @File           : user
 # @desc           : 主配置文件
 from apps.user.models import User
+from core import curd
 from utils import encrypt, response
-from utils.tools import order_by
 
 
 async def create(db, req):
@@ -23,14 +23,4 @@ async def create(db, req):
 
 def get_list(db, pagination):
     query = db.query(User)
-    total = query.count()
-    page = pagination.dict()
-    query = order_by(query, User, page)
-    records = query.offset(page["offset"]).limit(page["limit"]).all()
-    returns = []
-    for item in records:
-        tmp = item.__dict__
-        tmp['created_at'] = item.created_at.strftime('%Y-%m-%d %H:%M:%S')
-        returns.append(tmp)
-
-    return total, returns
+    return curd.get_list(query, User, pagination)

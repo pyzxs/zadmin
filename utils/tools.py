@@ -3,15 +3,6 @@ import importlib
 from core import logger
 
 
-def order_by(query, model, page):
-    if page['v_order_field']:
-        field = getattr(model, page['v_order_field'])
-        if page['v_order'] == 'desc':
-            query = query.order_by(field.desc())
-        else:
-            query = query.order_by(field.asc())
-    return query
-
 
 def import_modules(modules: list, desc: str, **kwargs):
     for module in modules:

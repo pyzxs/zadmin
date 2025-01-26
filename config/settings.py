@@ -40,7 +40,7 @@ auto_error:(bool) 可选参数，默认为 True。当验证失败时，如果设
 这里的 auto_error 设置为 False 是因为存在 OpenAuth：开放认证，无认证也可以访问，
 如果设置为 True，那么 FastAPI 会自动报错，即无认证时 OpenAuth 会失效，所以不能使用 True。
 """
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/user/api/login", auto_error=False) if OAUTH_ENABLE else lambda: ""
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/login", auto_error=False) if OAUTH_ENABLE else lambda: ""
 """安全的随机密钥，该密钥将用于对 JWT 令牌进行签名"""
 SECRET_KEY = 'vgb0tnl9d58+6n-6h-ea&u^1#s0ccp!794=kbvqacjq75vzps$'
 """用于设定 JWT 令牌签名算法"""
@@ -97,6 +97,7 @@ REQUEST_LOG_RECORD = True
 中间件配置
 """
 MIDDLEWARES = [
+    "core.middleware.http_request_cors_middleware",
     "core.middleware.register_request_log_middleware" if REQUEST_LOG_RECORD else None,
     "core.middleware.register_jwt_refresh_middleware"
 ]

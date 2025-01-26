@@ -7,16 +7,22 @@ from starlette.responses import JSONResponse
 from utils import status
 
 
-def success(*, data: Union[list, dict, str]) -> Response:
+def success(*, message, data: Union[list, dict, str] = '') -> Response:
     return JSONResponse(
         status_code=status.HTTP_SUCCESS,
         content={
             "code": 200,
-            "message": "Success",
+            "message": message,
             "data": data,
         }
     )
 
 
-def fail(*, status_code: int = status.HTTP_ERROR, detail: str = ''):
-    return HTTPException(status_code=status_code, detail=detail)
+def fail(*, status_code: int = status.HTTP_INTERNAL_SERVER_ERROR, detail: str = ''):
+    return JSONResponse(
+        status_code=status_code,
+        content={
+            "code": status_code,
+            "message": detail
+        }
+    )

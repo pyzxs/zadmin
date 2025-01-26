@@ -9,12 +9,7 @@ from typing import List, Union
 from pydantic import BaseModel, Field
 
 
-class Token(BaseModel):
-    access_token: str = Field(..., description='登录Token')
-    token_type: str = Field(..., description="jwt类型")
-
-
-class UserResponse(BaseModel):
+class User(BaseModel):
     id: int = Field(..., description="用户ID")
     mobile: str = Field(..., description="手机号码")
     name: str = Field(description="用户名")
@@ -27,6 +22,6 @@ class UserResponse(BaseModel):
     }
 
 
-class UserListResponse(BaseModel):
-    data: List[UserResponse]
+class UserList(BaseModel):
+    data: List[User]
     total: int = Field(description="数量")

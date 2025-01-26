@@ -13,14 +13,15 @@ Typer 官方文档：https://typer.tiangolo.com/
 
 import uvicorn
 
-from apps import userAPI
+from apps import systemAPI
+from apps.index import indexAPI
 from config import settings
 from core.database import engine, Base
 from core.exception import register_exception
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
+from core.router import get_all_routes
 from utils.tools import import_modules
 
 """
@@ -37,18 +38,12 @@ import_modules(settings.MIDDLEWARES, "中间件", app=app)
 
 # 全局异常捕捉处理
 register_exception(app)
+get_all_routes(app)
 
-# 跨域解决
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=settings.ALLOW_ORIGINS,
-    allow_credentials=settings.ALLOW_CREDENTIALS,
-    allow_methods=settings.ALLOW_METHODS,
-    allow_headers=settings.ALLOW_HEADERS
-)
-
+# 路由
 app.mount(settings.STATIC_URL, app=StaticFiles(directory=settings.STATIC_ROOT))
-app.include_router(userAPI, prefix='/user', tags=['用户'])
+app.include_router(systemAPI, prefix='/system', tags=['系统'])
+app.include_router(indexAPI, tags=['通用'])
 
 if __name__ == '__main__':
     if settings.DEBUG:

@@ -17,6 +17,7 @@ user_roles = Table(
     Base.metadata,
     Column("user_id", Integer, ForeignKey("users.id", ondelete="CASCADE")),
     Column("role_id", Integer, ForeignKey("roles.id", ondelete="CASCADE")),
+    comment="用户与角色关联表"
 )
 
 role_menus = Table(
@@ -24,6 +25,7 @@ role_menus = Table(
     Base.metadata,
     Column("role_id", Integer, ForeignKey("roles.id", ondelete="CASCADE")),
     Column("menu_id", Integer, ForeignKey("menus.id", ondelete="CASCADE")),
+    comment="角色与菜单关联表"
 )
 
 user_departments = Table(
@@ -31,13 +33,7 @@ user_departments = Table(
     Base.metadata,
     Column("user_id", Integer, ForeignKey("users.id", ondelete="CASCADE")),
     Column("department_id", Integer, ForeignKey("departments.id", ondelete="CASCADE")),
-)
-
-role_departments = Table(
-    "role_deptartments",
-    Base.metadata,
-    Column("role_id", Integer, ForeignKey("roles.id", ondelete="CASCADE")),
-    Column("department_id", Integer, ForeignKey("departments.id", ondelete="CASCADE")),
+    comment="用户与部门关联表"
 )
 
 
@@ -91,12 +87,11 @@ class Role(BaseModel):
     role_key: Mapped[str] = mapped_column(String(50), index=True, comment="权限字符")
     data_range: Mapped[int] = mapped_column(Integer, default=4, comment="数据权限范围")
     disabled: Mapped[bool] = mapped_column(Boolean, default=False, comment="是否禁用")
-    order: Mapped[int or None] = mapped_column(Integer, comment="排序")
+    order: Mapped[int or None] = mapped_column(Integer, default=0,  comment="排序")
     desc: Mapped[str or None] = mapped_column(String(255), comment="描述")
     is_admin: Mapped[bool] = mapped_column(Boolean, comment="是否为超级角色", default=False)
 
     menus: Mapped[set[Menu]] = relationship(secondary=role_menus)
-    departments: Mapped[set[Department]] = relationship(secondary=role_departments)
 
 
 class User(BaseModel):

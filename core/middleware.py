@@ -11,6 +11,9 @@
 """
 import time
 from fastapi import Request, Response
+from starlette.middleware.cors import CORSMiddleware
+
+from config import settings
 from core.logger import logger
 from fastapi import FastAPI
 
@@ -54,3 +57,13 @@ def register_jwt_refresh_middleware(app: FastAPI):
         refresh = request.scope.get('if-refresh', 0)
         response.headers["if-refresh"] = str(refresh)
         return response
+
+
+def http_request_cors_middleware(app: FastAPI):
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=settings.ALLOW_ORIGINS,
+        allow_credentials=settings.ALLOW_CREDENTIALS,
+        allow_methods=settings.ALLOW_METHODS,
+        allow_headers=settings.ALLOW_HEADERS
+    )
