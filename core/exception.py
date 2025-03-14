@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# @Project        : zadmin
+# @Project        : Apartment-partner-server
 # @version        : 1.0
-# @Create Time    : 2024/12/7
+# @Create Time    : 2025/2/12
 # @File           : exception.py
-# @desc           : 异常定义
+# @desc           : 异常处理类
 
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import HTTPException as StarletteHTTPException
@@ -147,3 +147,4 @@ def register_exception(app: FastAPI):
                 }
             ),
         )
+

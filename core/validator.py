@@ -1,18 +1,15 @@
 # -*- coding: utf-8 -*-
-# @Project        : zadmin
+# @Project        : Apartment-partner-server
 # @version        : 1.0
-# @Create Time    : 2024/12/7
+# @Create Time    : 2025/2/12
 # @File           : validator.py
-# @desc           : 请求体验证
-"""
-官方文档：https://pydantic-docs.helpmanual.io/usage/validators/#reuse-validators
-"""
+# @desc           : pydantic库注解验证器
 import datetime
 import re
 from typing import Union
 
 
-def date_str_vali(value: Union[str, datetime.date]):
+def valid_date_or_str(value: Union[str, datetime.date]):
     """
     日期字符串验证
     """
@@ -28,7 +25,7 @@ def date_str_vali(value: Union[str, datetime.date]):
     raise ValueError("无效的日期时间或字符串数据")
 
 
-def vali_telephone(value: str) -> str:
+def valid_telephone(value: str) -> str:
     """
     手机号验证器
     :param value: 手机号
@@ -45,7 +42,7 @@ def vali_telephone(value: str) -> str:
     return value
 
 
-def vali_email(value: str) -> str:
+def valid_email(value: str) -> str:
     """
     邮箱地址验证器
     :param value: 邮箱
@@ -62,7 +59,7 @@ def vali_email(value: str) -> str:
     return value
 
 
-def datetime_str_vali(value: Union[str, datetime.datetime]):
+def valid_datetime_or_str(value: Union[str, datetime.datetime]):
     """
     日期时间字符串验证
     """
@@ -75,12 +72,4 @@ def datetime_str_vali(value: Union[str, datetime.datetime]):
             pass
     elif isinstance(value, datetime.datetime):
         return value.strftime("%Y-%m-%d %H:%M:%S")
-    elif isinstance(value, dict):
-        # 用于处理 mongodb 日期时间数据类型
-        date_str = value.get("$date")
-        date_format = '%Y-%m-%dT%H:%M:%S.%fZ'
-        # 将字符串转换为datetime.datetime类型
-        datetime_obj = datetime.datetime.strptime(date_str, date_format)
-        # 将datetime.datetime对象转换为指定的字符串格式
-        return datetime_obj.strftime('%Y-%m-%d %H:%M:%S')
     raise ValueError("无效的日期时间或字符串数据")

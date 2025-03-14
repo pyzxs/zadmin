@@ -5,4 +5,3 @@
 # @File           : __init__.py
 # @desc           :  初始文件
 
-from apps.system.views import systemAPI

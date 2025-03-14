@@ -1,20 +1,21 @@
 # -*- coding: utf-8 -*-
-# @Project        : zadmin
+# @Project        : Apartment-partner-server
 # @version        : 1.0
-# @Create Time    : 2024/12/7
+# @Create Time    : 2025/2/12
 # @File           : datatype.py
-# @desc           : 数据类型
+# @desc           : 主配置文件
 
-import datetime
-from typing import Annotated, Union
+
+from typing import Annotated
+
 from pydantic import AfterValidator, PlainSerializer, WithJsonSchema
 
-from core.validator import vali_telephone, vali_email, datetime_str_vali, date_str_vali
+from core.validator import *
 
 # 实现自定义一个日期时间字符串的数据类型
 DatetimeStr = Annotated[
     Union[str, datetime.datetime],
-    AfterValidator(datetime_str_vali),
+    AfterValidator(valid_datetime_or_str),
     PlainSerializer(lambda x: x, return_type=str),
     WithJsonSchema({'type': 'string'}, mode='serialization')
 ]
@@ -22,7 +23,7 @@ DatetimeStr = Annotated[
 # 实现自定义一个手机号类型
 Telephone = Annotated[
     str,
-    AfterValidator(lambda x: vali_telephone(x)),
+    AfterValidator(lambda x: valid_telephone(x)),
     PlainSerializer(lambda x: x, return_type=str),
     WithJsonSchema({'type': 'string'}, mode='serialization')
 ]
@@ -30,7 +31,7 @@ Telephone = Annotated[
 # 实现自定义一个邮箱类型
 Email = Annotated[
     str,
-    AfterValidator(lambda x: vali_email(x)),
+    AfterValidator(lambda x: valid_email(x)),
     PlainSerializer(lambda x: x, return_type=str),
     WithJsonSchema({'type': 'string'}, mode='serialization')
 ]
@@ -38,7 +39,7 @@ Email = Annotated[
 # 实现自定义一个日期字符串的数据类型
 DateStr = Annotated[
     Union[str, datetime.date],
-    AfterValidator(date_str_vali),
+    AfterValidator(valid_date_or_str),
     PlainSerializer(lambda x: x, return_type=str),
     WithJsonSchema({'type': 'string'}, mode='serialization')
 ]

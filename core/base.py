@@ -1,16 +1,16 @@
 # -*- coding: utf-8 -*-
-# @Project        : zadmin
+# @Project        : Apartment-partner-server
 # @version        : 1.0
-# @Create Time    : 2024/12/7
+# @Create Time    : 2025/2/12
 # @File           : base.py
-# @desc           : 主配置文件
+# @desc           : ORM基类
 
 from datetime import datetime
-from typing import Union
 
+from sqlalchemy import DateTime, Integer, func, inspect
 from sqlalchemy.orm import Mapped, mapped_column
+
 from core.database import Base
-from sqlalchemy import DateTime, Integer, func, Boolean, inspect
 
 
 class BaseModel(Base):
@@ -19,15 +19,15 @@ class BaseModel(Base):
     """
     __abstract__ = True
 
-    id:  Mapped[int] = mapped_column(Integer, primary_key=True, comment='主键ID')
-    created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), comment='创建时间')
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, comment='主键ID')
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=func.now(), comment='创建时间')
     updated_at: Mapped[datetime] = mapped_column(
         DateTime,
-        server_default=func.now(),
+        default=func.now(),
         onupdate=func.now(),
         comment='更新时间'
     )
-    deleted_at: Mapped[datetime] = mapped_column(DateTime,  nullable=True, comment='删除时间')
+    deleted_at: Mapped[datetime] = mapped_column(DateTime, nullable=True, comment='删除时间')
 
     @classmethod
     def get_column_attrs(cls) -> list:
@@ -65,4 +65,3 @@ class BaseModel(Base):
         """
         mapper = inspect(cls)
         return mapper.relationships.keys()
-

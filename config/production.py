@@ -31,3 +31,35 @@ ALIYUN_OSS = {
     "baseUrl": "baseUrl"
 }
 
+
+"""
+redis作为缓存使用
+格式："redis://:密码@地址:端口/数据库名称"
+"""
+
+CACHE_DB_ENABLE = True
+CACHE_DB_URL = "redis://:123456@127.0.0.1:6379/0"
+CACHE_EXPIRE = 60 * 60 * 24 * 7
+
+
+"""
+消息队列及定时任务处理,需要以下安装包
+redis 地址 https://github.com/redis/redis-py
+celery https://docs.celeryq.dev/
+
+安装方式
+pip install redis
+pip install celery
+pip install eventlet
+"""
+SCHEDULE_ENABLE = True
+SCHEDULE_BROKER_URL = 'redis://:123456@127.0.0.1:6379/0'
+SCHEDULE_RESULT_URL = 'redis://:123456@127.0.0.1:6379/1'
+SCHEDULE_RESULT_EXPIRE = 60 * 60 * 24
+
+"""
+获取IP地址归属地
+文档：https://user.ip138.com/ip/doc
+"""
+IP_PARSE_ENABLE = False
+IP_PARSE_TOKEN = "IP_PARSE_TOKEN"

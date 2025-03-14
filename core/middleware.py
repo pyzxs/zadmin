@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-# @Project        : zadmin
+# @Project        : Apartment-partner-server
 # @version        : 1.0
-# @Create Time    : 2024/12/7
+# @Create Time    : 2025/2/12
 # @File           : middleware.py
-# @desc           : 中间件
-
+# @desc           : 路由中间件
 """
 官方文档——中间件：https://fastapi.tiangolo.com/tutorial/middleware/
 官方文档——高级中间件：https://fastapi.tiangolo.com/advanced/middleware/
@@ -14,16 +13,16 @@ from fastapi import Request, Response
 from starlette.middleware.cors import CORSMiddleware
 
 from config import settings
-from core.logger import logger
 from fastapi import FastAPI
+from core.logger import logger
 
 
 def write_request_log(request: Request, response: Response):
     http_version = f"http/{request.scope['http_version']}"
-    content_length = response.raw_headers[0][1]
+    content_length = response.raw_headers[0][1].decode("UTF-8")
     process_time = response.headers["X-Process-Time"]
-    content = f"basehttp.log_message: '{request.method} {request.url} {http_version}' {response.status_code}" \
-              f"{response.charset} {content_length} {process_time}"
+    content = f"http.log_message: '{request.method} {request.url} {http_version}' {response.status_code}" \
+              f" {response.charset} {content_length} {process_time}"
     logger.info(content)
 
 

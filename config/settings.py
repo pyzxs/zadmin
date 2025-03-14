@@ -52,12 +52,6 @@ REFRESH_TOKEN_EXPIRE_MINUTES = 1440 * 2
 """access_token 缓存时间，用于刷新token使用，30分钟"""
 ACCESS_TOKEN_CACHE_MINUTES = 30
 
-"""
-挂载临时文件目录，并添加路由访问，此路由不会在接口文档中显示
-TEMP_DIR：临时文件目录绝对路径
-官方文档：https://fastapi.tiangolo.com/tutorial/static-files/
-"""
-TEMP_DIR = os.path.join(BASE_DIR, "temp")
 
 """
 挂载静态目录，并添加路由访问，此路由不会在接口文档中显示
@@ -65,6 +59,7 @@ STATIC_URL：路由访问
 STATIC_ROOT：静态文件目录绝对路径
 官方文档：https://fastapi.tiangolo.com/tutorial/static-files/
 """
+STATIC_ENABLE = True
 STATIC_URL = "/media"
 STATIC_DIR = "static"
 STATIC_ROOT = os.path.join(BASE_DIR, STATIC_DIR)
@@ -90,6 +85,8 @@ ALLOW_HEADERS = ["*"]
 DEFAULT_PASSWORD = "123456"
 # 默认登陆时最大输入密码或验证码错误次数
 DEFAULT_AUTH_ERROR_MAX_NUMBER = 5
+# 是否开启保存登录日志
+LOGIN_LOG_RECORD = True
 # 是否开启保存每次请求日志到本地
 REQUEST_LOG_RECORD = True
 
