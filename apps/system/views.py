@@ -70,9 +70,8 @@ async def create_menu(
         req: request_schemas.CreateMenu,
         u=Depends(auth.get_current_user),
         permission_check: bool = Depends(auth.check_permission),
-        db: Session = Depends(get_db)
 ):
-    menu.create_menu(db, u, req)
+    menu.create_menu(req)
     return response.success(message="创建菜单完成")
 
 

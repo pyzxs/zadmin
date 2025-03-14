@@ -33,3 +33,4 @@ class CreateMenu(BaseModel):
     order: int = Field(default=0, description="排序")
     menu_type: str = Field(description="菜单类型")
     parent_id: Union[int, None] = Field(default=0, description="父级ID")
+    perms: Union[str,None] = Field(description="权限标识")

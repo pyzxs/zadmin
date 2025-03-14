@@ -5,7 +5,7 @@
 # @File           : menu
 # @desc           : 主配置文件
 
-from apps.user.models import Menu
+from apps.system.models import Menu
 from core import curd
 
 
