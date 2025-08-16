@@ -1,15 +1,10 @@
 # -*- coding: utf-8 -*-
-# @Project        : Apartment-partner-server
+# @Project        : zadmin
 # @version        : 1.0
 # @Create Time    : 2025/2/12
 # @File           : main.py
 # @desc           : 入口主文件
 
-"""
-FastApi 更新文档：https://github.com/tiangolo/fastapi/releases
-FastApi Github：https://github.com/tiangolo/fastapi
-Typer 官方文档：https://typer.tiangolo.com/
-"""
 
 import uvicorn
 from fastapi import FastAPI
