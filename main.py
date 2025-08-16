@@ -13,10 +13,10 @@ Typer 官方文档：https://typer.tiangolo.com/
 
 import uvicorn
 from fastapi import FastAPI
-
 import config
 
 settings = config.get_settings()
+
 
 def create_app():
     """启动项目"""
