@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # 应用配置
 app:
-  name: "My FastAPI App"
+  name: "zadmin"
   version: "1.0"
   host: "0.0.0.0"
   port: 8000
@@ -9,6 +9,7 @@ app:
   secret_key: "your-secret-key-here"
   allowed_origins:
     - "*"
+
 
 # 数据库配置
 database:
@@ -29,5 +30,6 @@ logging:
   level: "INFO"
   log_path: "logs/app.log"
   error_path: "logs/error.log"
-  rotation: "10 MB"  # 日志文件轮转大小
+  rotate_size: 10  # 日志文件轮转大小 单位M
+  back_files: 5 # 多保留n个备份
 

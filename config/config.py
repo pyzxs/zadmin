@@ -6,6 +6,9 @@ import yaml
 from pydantic import BaseModel
 from pydantic_settings import BaseSettings
 
+# 根目录地址
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 
 # 子模型定义
 class AppConfig(BaseModel):
@@ -35,7 +38,9 @@ class RedisConfig(BaseModel):
 class LoggingConfig(BaseModel):
     level: str = "INFO"
     log_path: str = "logs/app.log"
-    rotation: str = "10 MB"
+    error_path: str = "logs/error.log"
+    rotate_size: int = 10
+    back_files: int = 5
 
 
 # 主配置模型
@@ -46,8 +51,6 @@ class Settings(BaseSettings):
     logging: LoggingConfig
 
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 # 全局缓存
 _cached_config: Optional[Dict[str, Any]] = None
 _cached_mtime: Optional[float] = None
@@ -57,7 +60,7 @@ def load_yaml_config_with_cache(file_path: str) -> Dict[str, Any]:
     global _cached_config, _cached_mtime
     current_mtime = os.path.getmtime(file_path)
     if _cached_config is None or current_mtime != _cached_mtime:
-        print(f"Reloading YAML file: {file_path}")
+        print("读取配置文件")
         with open(file_path, "r", encoding="UTF-8") as f:
             _cached_config = yaml.safe_load(f)
             _cached_mtime = current_mtime
@@ -65,7 +68,7 @@ def load_yaml_config_with_cache(file_path: str) -> Dict[str, Any]:
 
 
 def get_settings() -> Settings:
-    file_path = BASE_DIR + "/config/config.yml"
+    file_path = os.path.join(BASE_DIR, "config/config.yml")
     config_data = load_yaml_config_with_cache(file_path)
     return Settings(**config_data)
 
@@ -76,8 +79,3 @@ if __name__ == "__main__":
     settings1 = get_settings()  # 第一次加载
     settings2 = get_settings()  # 从缓存读取
     print(settings1 == settings2)  # True
-
-    # 模拟文件修改（手动更改 application.yaml 后再次运行）
-    input("Modify config.yaml and press Enter...")
-    settings3 = get_settings()  # 检测到文件变化，重新加载
-    print(settings1 == settings3)  # False（如果文件被修改）
