@@ -29,10 +29,7 @@ class DatabaseConfig(BaseModel):
 
 
 class RedisConfig(BaseModel):
-    host: str = "localhost"
-    port: int = 6379
-    password: str = ""
-    db: int = 0
+    url: str = "redis://:123456@127.0.0.1:6379/0"
 
 
 class LoggingConfig(BaseModel):

@@ -7,14 +7,12 @@
 import os.path
 
 import uvicorn
-from fastapi import FastAPI, Path, HTTPException
-from starlette import status
+from fastapi import FastAPI, Path
 from starlette.staticfiles import StaticFiles
 
 import config
 from config.config import BASE_DIR
-from core import get_logger, register_exception
-from core.exception import CustomException
+from core import register_exception
 
 settings = config.get_settings()
 
