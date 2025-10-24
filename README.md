@@ -5,5 +5,5 @@
 
 配置处理使用如下库
 ```shell
-pip install pydantic-settings pyyaml
+pip install -r requirements.txt
 ```
