@@ -32,6 +32,17 @@ class RedisConfig(BaseModel):
     url: str = "redis://:123456@127.0.0.1:6379/0"
 
 
+class CorsConfig(BaseModel):
+    allow_origins: list
+    allow_credentials: bool = False
+    allow_headers: list
+    allow_methods: list
+
+class JwtConfig(BaseModel):
+    secret_key: str
+    algorithm: str = "HS256"
+    expires_in: int = 7200
+
 class LoggingConfig(BaseModel):
     level: str = "INFO"
     log_path: str = "logs/app.log"
@@ -46,6 +57,8 @@ class Settings(BaseSettings):
     database: DatabaseConfig
     redis: RedisConfig
     logging: LoggingConfig
+    cors: CorsConfig
+    jwt: JwtConfig
 
 
 # 全局缓存

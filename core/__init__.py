@@ -6,6 +6,9 @@
 # @desc           : 主配置文件
 from core.exception import register_exception
 from core.logger import get_logger
+from core.middleware import register_middleware
 
-__all__ = [get_logger,register_exception]
+__all__ = [get_logger,register_exception, register_middleware]
+
+
 

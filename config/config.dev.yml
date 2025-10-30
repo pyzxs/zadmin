@@ -22,6 +22,20 @@ database:
 redis:
   url: "redis://:123456@127.0.0.1:6379/0"
 
+cors:
+  # 只允许访问的域名列表，* 代表所有
+  allow_origins: ['*']
+  # 是否支持携带 cookie
+  allow_credentials: true
+  # 设置允许跨域的http方法，比如 get、post、put等。
+  allow_methods: ["*"]
+  # 允许携带的headers，可以用来鉴别来源等作用。
+  allow_headers: ["*"]
+
+jwt:
+  secret_key: vgb0tnl9d58+6n-6h-ea&u^1#s0ccp!794=kbvqacjq75vzps$
+  expires_in: 7200
+
 # 日志配置
 logging:
   level: "INFO"
